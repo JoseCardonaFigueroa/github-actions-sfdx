@@ -5,5 +5,6 @@ public with sharing class HelloWorldControler {
 
     private void helloWorld() {
         System.debug('Hello World from Rotterdam!!!');
+        System.debug('I\'m happy');
     }
 }
