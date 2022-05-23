@@ -117,7 +117,7 @@ jobs:
               run: sfdx plugins:install @salesforce/sfdx-scanner
 
             # Prior to setting up this workflow, you have to create a Github Secret
-            # that contains the sfdx url of the integration/qa org.
+            # that contains the sfdx url of the DEVELOP/qa org.
 
             # The steps to generate the url are here 
             # https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference_auth_sfdxurl.htm
@@ -127,16 +127,16 @@ jobs:
             # was generated from. This works just like that, there's no need to create
             # connected apps or any else. 
 
-            # The URL is stored in the Github Secret named SFDX_INTEGRATION_URL
+            # The URL is stored in the Github Secret named SFDX_DEVELOP_URL
             # so here we store the URL into a text file
-            - name: 'Populate auth file with SFDX_URL secret of integration org'
+            - name: 'Populate auth file with SFDX_URL secret of develop org'
               shell: bash
               run: |
-                  echo ${{ secrets.SFDX_INTEGRATION_URL}} > ./SFDX_INTEGRATION_URL.txt
+                  echo ${{ secrets.SFDX_DEVELOP_URL}} > ./SFDX_DEVELOP_URL.txt
 
             # Authenticate to org using the URL stored in the text file
-            - name: 'Authenticate to Integration Org'
-              run: sfdx auth:sfdxurl:store -f ./SFDX_INTEGRATION_URL.txt -s -a integration
+            - name: 'Authenticate to DEVELOP Org'
+              run: sfdx auth:sfdxurl:store -f ./SFDX_DEVELOP_URL.txt -s -a develop
 
             # We use SFDX Git Delta to create a directory with only the metadata that has changed.
             # this allows us to deploy only those changes, as opposed to deploying the entire branch. 
