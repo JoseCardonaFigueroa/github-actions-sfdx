@@ -52,7 +52,7 @@ jobs:
               run: sfdx auth:sfdxurl:store -f ./SFDX_PRODUCTION_URL.txt -s -a production
 
             - name: 'Deploy the entire branch to Production org'
-              run: sfdx force:source:deploy -p force-app --testlevel RunLocalTests --json
+              run: sfdx force:source:deploy -p force-app --testlevel RunLocalTests --json --ignorewarnings
 
             - name: 'Deploy destructive changes (if any) to Production org'
               run: sfdx force:mdapi:deploy -d "changed-sources/destructiveChanges" --checkonly --ignorewarnings 

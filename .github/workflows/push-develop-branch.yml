@@ -63,7 +63,7 @@ jobs:
               run: sfdx auth:sfdxurl:store -f ./SFDX_STAGING_URL.txt -s -a staging
 
             - name: 'Deploy the entire branch'
-              run: sfdx force:source:deploy -p force-app --testlevel RunLocalTests --json
+              run: sfdx force:source:deploy -p force-app --testlevel RunLocalTests --json --ignorewarnings 
 
             - name: 'Deploy destructive changes (if any) to Staging org'
               run: sfdx force:mdapi:deploy -d "changed-sources/destructiveChanges" --checkonly --ignorewarnings
